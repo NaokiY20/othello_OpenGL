@@ -5,9 +5,24 @@
 // 	//#include <GL/glut.h> 
 // #endif
 #include <GL/glut.h>
+#include <math.h>
 
 #define WIDTH 800
 #define HEIGHT 800
+
+#define PI 3.1415926535
+
+void drawCircle(double radius,double posx,double posy,double r,double g, double b){
+	glColor3d(r,g,b);
+	
+	int resolution=90; //ポリゴンの頂点数
+	glBegin(GL_POLYGON);
+	for(int i=0;i<resolution;i++){
+		glVertex2d(posx+radius*cos(2*PI*i/resolution),
+		posy+radius*sin(2*PI*i/resolution));
+	}
+	glEnd();
+}
 
 void display(void)
 {	
@@ -33,6 +48,8 @@ void display(void)
 		glVertex2i(560,240);
 		glVertex2i(560,560);
 	glEnd();
+
+	drawCircle(30,80+40,80+40,1,1,1);
 	glutSwapBuffers();
 }
 
