@@ -57,12 +57,13 @@ void display(void)
 }
 
 void Idle() {
-	glutPostRedisplay();
+	// glutPostRedisplay(); これはGPU使用率がマズそう
 }
 
 void timer(int value) {
 	pos_othello=(pos_othello+1)%8;
 	glutTimerFunc(100 , timer , 0);
+	glutPostRedisplay();
 }
 
 int main(int argc, char *argv[])
