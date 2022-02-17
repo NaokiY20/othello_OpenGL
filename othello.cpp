@@ -57,7 +57,7 @@ void display(void)
 }
 
 void Idle() {
-	// glutPostRedisplay(); これはGPU使用率がマズそう
+	// glutPostRedisplay(); //これはGPU使用率がマズそう
 }
 
 void timer(int value) {
