@@ -12,6 +12,8 @@
 
 #define PI 3.1415926535
 
+int pos_othello=0;
+
 void drawCircle(double radius,double posx,double posy,double r,double g, double b){
 	glColor3d(r,g,b);
 	
@@ -49,8 +51,18 @@ void display(void)
 		glVertex2i(560,560);
 	glEnd();
 
-	drawCircle(30,80+40,80+40,1,1,1);
+	
+	drawCircle(30,80+40+pos_othello*80,80+40,1,1,1);
 	glutSwapBuffers();
+}
+
+void Idle() {
+	glutPostRedisplay();
+}
+
+void timer(int value) {
+	pos_othello=(pos_othello+1)%8;
+	glutTimerFunc(100 , timer , 0);
 }
 
 int main(int argc, char *argv[])
@@ -64,6 +76,9 @@ int main(int argc, char *argv[])
 	// gluOrtho2D(0, 800, 800,0);//座標系の設定 ←使えない
     glOrtho(0, WIDTH, HEIGHT, 0, -1, 1); //代わり
 	glutDisplayFunc(display);//描画関数を指定
+	glutIdleFunc(Idle);
+	glutTimerFunc(1000 , timer , 0);
+
 	glutMainLoop();
 	return 0;
 }
