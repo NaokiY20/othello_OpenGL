@@ -14,6 +14,9 @@
 
 int pos_othello=0;
 
+int cursorX=0;
+int cursorY=0;
+
 void drawCircle(double radius,double posx,double posy,double r,double g, double b){
 	glColor3d(r,g,b);
 	
@@ -26,9 +29,25 @@ void drawCircle(double radius,double posx,double posy,double r,double g, double 
 	glEnd();
 }
 
+void drawCursor(){
+	glColor3d(1.0,1.0,0);
+
+	int originX=80+cursorX*80;
+	int originY=80+cursorY*80;
+	glBegin(GL_QUADS);
+		glVertex2i(originX,originY);
+		glVertex2i(originX,originY+80);
+		glVertex2i(originX+80,originY+80);
+		glVertex2i(originX+80,originY);
+	glEnd();
+}
+
 void display(void)
 {	
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+	drawCursor();
+
 	//ラインを描く
 	glColor3f(0,0,0);
 	glLineWidth(3);//線幅の指定。省略可。指定しなければ1。
@@ -66,6 +85,14 @@ void timer(int value) {
 	glutPostRedisplay();
 }
 
+void mouseMotion(int x,int y){
+	if((80<=x && x<=720)&&(80<=y && y<=720)){
+		cursorX=(x-80)/80;
+		cursorY=(y-80)/80;
+		glutPostRedisplay();
+	}
+}
+
 int main(int argc, char *argv[])
 {
 	glutInit(&argc, argv);
@@ -79,6 +106,7 @@ int main(int argc, char *argv[])
 	glutDisplayFunc(display);//描画関数を指定
 	glutIdleFunc(Idle);
 	glutTimerFunc(1000 , timer , 0);
+	glutPassiveMotionFunc(mouseMotion); //マウスが動くと実行
 
 	glutMainLoop();
 	return 0;
