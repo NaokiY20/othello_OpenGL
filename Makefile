@@ -2,5 +2,5 @@ LIBS = -lfreeglut -lopengl32
 CC = g++
 
 all: othello
-othello: othello.cpp
-	$(CC) othello.cpp -o run.exe $(LIBS)
+othello: main.cpp othello.cpp
+	$(CC) main.cpp othello.cpp -o run.exe $(LIBS)
