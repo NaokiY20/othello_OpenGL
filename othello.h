@@ -1,10 +1,14 @@
 #include <vector>
 #include <utility>
 
+#define EMPTY 0
+#define BLACK 1
+#define WHITE 2
+
 class GameOthello{
     public:
-    int board[8][8]={}; // 0:なし, 1:黒, 2:白
-    int turn=0; //0:黒, 1:白
+    int board[8][8]={};
+    int turn=BLACK;
     
 
     GameOthello();
