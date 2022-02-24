@@ -6,6 +6,7 @@
 // #endif
 #include <GL/glut.h>
 #include <math.h>
+#include <stdio.h>
 #include "othello.h"
 
 #define WIDTH 800
@@ -53,10 +54,21 @@ void display(void)
 {	
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+	//選択肢の表示
+	othello->updateAble();
+	for(int i=0;i<8;i++){
+		for(int j=0;j<8;j++){
+			if(othello->able[i][j]!=0){
+				drawMarker(j,i,0.5,0.8,1.0);
+			}
+		}
+	}
+
 	//カーソル
 	drawMarker(cursorX,cursorY,1.0,1.0,0.0);
 
-	//選択肢の表示
+	
+
 
 	//ラインを描く
 	glColor3f(0,0,0);
@@ -118,6 +130,13 @@ void mouseMotion(int x,int y){
 	}
 }
 
+void mouseClick(int button, int state, int x, int y){
+	if(button==GLUT_LEFT_BUTTON && state==GLUT_DOWN){
+		othello->put_stone(cursorY,cursorX);
+		printf("CLICK\n");
+	}
+}
+
 // 面倒なのでウィンドウの大きさを固定
 void fixedWindow(int width,int height){
 	glutReshapeWindow(windowWidth,windowHeight);
@@ -140,6 +159,7 @@ int main(int argc, char *argv[])
 	glutTimerFunc(1000 , timer , 0);
 	glutPassiveMotionFunc(mouseMotion); //マウスが動くと実行
 	glutReshapeFunc(fixedWindow);
+	glutMouseFunc(mouseClick);
 
 	othello = new GameOthello();
 

@@ -5,9 +5,40 @@
 #define BLACK 1
 #define WHITE 2
 
+template<class T> struct vec2d{
+    T x;
+    T y;
+
+    vec2d(int x,int y):x(x),y(y){}
+    vec2d(const vec2d &v){
+        this->x = v.x;
+        this->y = v.y;
+    }
+    vec2d operator - () const{
+        return vec2d(-this->x, -this->y);
+    }
+    vec2d operator + (const vec2d &p2) const{
+        return vec2d(this->x+p2.x,this->y+p2.y);
+    }
+    vec2d operator - (const vec2d &p2) const{
+        return vec2d(this->x-p2.x,this->y-p2.y);
+    }
+    vec2d operator += (const vec2d &p2){
+        this->x+=p2.x;
+        this->y+=p2.y;
+        return *this;
+    }
+    vec2d operator -= (const vec2d &p2){
+        this->x-=p2.x;
+        this->y-=p2.y;
+        return *this;
+    }
+};
+
 class GameOthello{
     private:
-    int searchAble(std::pair<int,int>, std::pair<int,int>);
+    int searchAble(vec2d<int>, vec2d<int>);
+    int change_stones(vec2d<int> pos,vec2d<int> vec);
     public:
     int board[8][8]={}; //現在の盤面
     int turn=BLACK; //現在のターン
@@ -16,7 +47,8 @@ class GameOthello{
 
     GameOthello();
     void updateAble(void);
-
-
+    bool put_able(int,int);
+    bool put_stone(int,int);
+    void changeTurn(void);
 
 };
