@@ -43,6 +43,7 @@ class GameOthello{
     int board[8][8]={}; //現在の盤面
     int turn=BLACK; //現在のターン
     int able[8][8]={}; //石を置ける場所と返せる数
+    bool state_pass=false;
     
 
     GameOthello();
@@ -50,5 +51,6 @@ class GameOthello{
     bool put_able(int,int);
     bool put_stone(int,int);
     void changeTurn(void);
+    bool updatePass(void);
 
 };

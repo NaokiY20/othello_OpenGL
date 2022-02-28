@@ -1,4 +1,5 @@
 #include "othello.h"
+#include <stdio.h>
 
 GameOthello::GameOthello(){
     board[3][3]=BLACK;
@@ -54,8 +55,9 @@ int GameOthello::change_stones(vec2d<int> pos,vec2d<int> vec){
         int res=change_stones(pos+vec,vec);
         if(res==-1) return -1;
         else{
-            if(board[pos.x][pos.y]==BLACK) board[pos.x][pos.y]==WHITE;
-            if(board[pos.x][pos.y]==WHITE) board[pos.x][pos.y]==BLACK;
+			printf("chahge:%d,%d\n",pos.x,pos.y);
+            if(board[pos.x][pos.y]==BLACK) board[pos.x][pos.y]=WHITE;
+            else if(board[pos.x][pos.y]==WHITE) board[pos.x][pos.y]=BLACK;
             return ++res;
         }
     }
@@ -76,4 +78,16 @@ bool GameOthello::put_stone(int x,int y){
 void GameOthello::changeTurn(){
     if(turn==BLACK) turn=WHITE;
     else if(turn==WHITE) turn=BLACK;
+}
+
+bool GameOthello::updatePass(){
+	updateAble();
+	int sum=0;
+	for(int i=0;i<8;i++){
+		for(int j=0;j<8;j++){
+			sum+=able[i][j];
+		}
+	}
+	if(sum==0) return state_pass=true;
+	else return state_pass=false;
 }
