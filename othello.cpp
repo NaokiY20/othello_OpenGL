@@ -23,6 +23,7 @@ void GameOthello::updateAble(){
                 }
                 able[i][j]=count;
             }
+			else able[i][j]=0;
         }
     }
 }
@@ -63,6 +64,7 @@ int GameOthello::change_stones(vec2d<int> pos,vec2d<int> vec){
     }
 }
 bool GameOthello::put_stone(int x,int y){
+	if(!((0<=x&&x<8)&&(0<=y&&y<8))) return false;
     if(!put_able(x,y)) return false;
     else{
         board[x][y]=turn;
@@ -88,6 +90,19 @@ bool GameOthello::updatePass(){
 			sum+=able[i][j];
 		}
 	}
-	if(sum==0) return state_pass=true;
+	int sum2=0;
+	changeTurn();
+	updateAble();
+	for(int i=0;i<8;i++)
+	for(int j=0;j<8;j++){
+		sum2+=able[i][j];
+	}
+	changeTurn();
+	updateAble();
+
+	if(sum==0){
+		if(sum2==0) return state_gameset=true;
+		else return state_pass=true;
+	}
 	else return state_pass=false;
 }

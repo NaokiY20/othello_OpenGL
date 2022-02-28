@@ -44,6 +44,7 @@ class GameOthello{
     int turn=BLACK; //現在のターン
     int able[8][8]={}; //石を置ける場所と返せる数
     bool state_pass=false;
+    bool state_gameset=false;
     
 
     GameOthello();

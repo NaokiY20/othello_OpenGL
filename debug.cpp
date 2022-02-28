@@ -29,10 +29,15 @@ void print(GameOthello *GO){
 int main(){
     GameOthello othello;
 
+
     int x,y;
     //Game Loop
     while(1){
         othello.updatePass();
+        if(othello.state_gameset){
+            printf("\nGAME SET\n");
+            break;
+        }
         if(othello.state_pass){
             printf("\nPASS\n");
             othello.changeTurn();
