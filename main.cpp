@@ -123,9 +123,14 @@ void timer(int value) {
 }
 
 void mouseMotion(int x,int y){
-	if((80<x && x<720) && (80<y && y<720)){
-		cursorX=(x-80)/80;
-		cursorY=(y-80)/80;
+	// ウィンドウサイズを取得し、盤面に座標圧縮
+	int sizeWX=glutGet(GLUT_WINDOW_WIDTH);
+	int sizeWY=glutGet(GLUT_WINDOW_HEIGHT);
+	int unitX=sizeWX/10;
+	int unitY=sizeWY/10;
+	if((unitX<x && x<sizeWX-unitX) && (unitY<y && y<sizeWY-unitY)){
+		cursorX=(x-unitX)/unitX;
+		cursorY=(y-unitY)/unitY;
 		glutPostRedisplay();
 	}
 }
@@ -139,7 +144,7 @@ void mouseClick(int button, int state, int x, int y){
 
 // 面倒なのでウィンドウの大きさを固定
 void fixedWindow(int width,int height){
-	glutReshapeWindow(windowWidth,windowHeight);
+	// glutReshapeWindow(windowWidth,windowHeight);
 }
 
 
@@ -153,12 +158,12 @@ int main(int argc, char *argv[])
 	glutCreateWindow("Othello");//ウィンドウの名前
 	glClearColor( 0 , 0.7, 0, 1);//オセロ盤の色
 	// gluOrtho2D(0, 800, 800,0);//座標系の設定 ←使えない
-    glOrtho(0, WIDTH, HEIGHT, 0, -1, 1); //代わり
+    glOrtho(0, 800, 800, 0, -1, 1); //代わり
 	glutDisplayFunc(display);//描画関数を指定
 	glutIdleFunc(Idle);
 	glutTimerFunc(1000 , timer , 0);
 	glutPassiveMotionFunc(mouseMotion); //マウスが動くと実行
-	glutReshapeFunc(fixedWindow);
+	// glutReshapeFunc(fixedWindow);
 	glutMouseFunc(mouseClick);
 
 	othello = new GameOthello();
