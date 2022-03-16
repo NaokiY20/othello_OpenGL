@@ -1,4 +1,4 @@
-#include "othello.h"
+#include "othello.hpp"
 #include <stdio.h>
 
 GameOthello::GameOthello(){

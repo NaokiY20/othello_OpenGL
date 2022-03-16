@@ -7,7 +7,7 @@
 #include <GL/glut.h>
 #include <math.h>
 #include <stdio.h>
-#include "othello.h"
+#include "othello.hpp"
 
 #define WIDTH 800
 #define HEIGHT 800
@@ -131,7 +131,7 @@ void mouseMotion(int x,int y){
 	if((unitX<x && x<sizeWX-unitX) && (unitY<y && y<sizeWY-unitY)){
 		cursorX=(x-unitX)/unitX;
 		cursorY=(y-unitY)/unitY;
-		glutPostRedisplay();
+		// glutPostRedisplay();
 	}
 }
 
