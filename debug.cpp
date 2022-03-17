@@ -1,4 +1,4 @@
-#include "othello.h"
+#include "othello.hpp"
 #include <bits/stdc++.h>
 
 using namespace std;
