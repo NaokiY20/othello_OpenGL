@@ -1,4 +1,8 @@
-LIBS = -lfreeglut -lopengl32
+ifeq ($(OS),Windows_NT)
+	LIBS = -lfreeglut -lopengl32
+else
+	LIBS = -framework GLUT -framework OpenGL
+endif
 CC = g++
 
 all: othello
