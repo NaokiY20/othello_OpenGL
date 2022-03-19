@@ -10,3 +10,5 @@ othello: main.cpp othello.cpp
 	$(CC) main.cpp othello.cpp -o run.exe $(LIBS)
 debug: debug.cpp othello.cpp
 	$(CC) debug.cpp othello.cpp -o debug
+test: animation_test.cpp
+	$(CC) animation_test.cpp -o animation_test $(LIBS)
