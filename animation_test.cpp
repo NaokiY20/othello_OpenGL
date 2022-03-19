@@ -47,20 +47,12 @@ int main(int argc, char *argv[])
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_RGB | GLUT_DEPTH | GLUT_DOUBLE);	
 	glutInitWindowSize(800,800);//ウィンドウの画面の幅と高さを指定
-	// glutInitWindowSize(800,800);//ウィンドウの画面の幅と高さを指定
 	glutInitWindowPosition(0, 0);//ウィンドウの場所を指定
 	glutCreateWindow("Othello");//ウィンドウの名前
 	glClearColor( 0 , 0.7, 0, 1);//オセロ盤の色
-	// gluOrtho2D(0, 800, 800,0);//座標系の設定 ←使えない
     glOrtho(0, 800, 800, 0, -1, 1); //代わり
 	glutDisplayFunc(display);//描画関数を指定
-	// glutIdleFunc(Idle);
 	glutTimerFunc(10 , timer , 0);
-	// glutPassiveMotionFunc(mouseMotion); //マウスが動くと実行
-	// glutReshapeFunc(fixedWindow);
-	// glutMouseFunc(mouseClick);
-
-	// othello = new GameOthello();
 
 	glutMainLoop();
 	return 0;
