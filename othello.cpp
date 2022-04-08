@@ -67,6 +67,12 @@ bool GameOthello::put_able(int x,int y){
 }
 
 int GameOthello::change_stones(vec2d<int> pos,vec2d<int> vec){
+    for(auto list:reverse_stones[pos.x][pos.y]){
+        for(auto vec:list){
+            printf("(%d,%d)\n",vec.x,vec.y);
+        }
+        printf("\n");
+    }
     if((pos.x<0 || 8<=pos.x) || (pos.y<0 || 8<=pos.y)){
         return -1;
     }
