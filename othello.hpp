@@ -39,11 +39,13 @@ template<class T> struct vec2d{
 class GameOthello{
     private:
     int searchAble(vec2d<int>, vec2d<int>);
+    int searchAble(vec2d<int>, vec2d<int>, std::vector<vec2d<int>>& );
     int change_stones(vec2d<int> pos,vec2d<int> vec);
     public:
     int board[8][8]={}; //現在の盤面
     int turn=BLACK; //現在のターン
     int able[8][8]={}; //石を置ける場所と返せる数
+    std::vector<std::vector<vec2d<int>>> reverse_stones[8][8]; //石を置いたときにひっくり返る石のリスト
     bool state_pass=false;
     bool state_gameset=false;
     
