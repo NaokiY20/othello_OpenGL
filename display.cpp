@@ -66,9 +66,6 @@ void disp_select(){
 	//カーソル
 	drawMarker(cursorX,cursorY,1.0,1.0,0.0);
 
-	
-
-
 	//ラインを描く
 	glColor3f(0,0,0);
 	glLineWidth(3);//線幅の指定。省略可。指定しなければ1。
@@ -112,5 +109,46 @@ void disp_select(){
 }
 
 void disp_reverse(){
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+	//ラインを描く
+	glColor3f(0,0,0);
+	glLineWidth(3);//線幅の指定。省略可。指定しなければ1。
+	glBegin(GL_LINES);
+	for(int i=0;i<9;i++){
+		glVertex2i(80+80*i,720);//縦線上端
+		glVertex2i(80+80*i,80);//縦線下端
+		glVertex2i(80,80+80*i);//横線左端
+		glVertex2i(720,80+80*i);//横線右端
+	}
+	glEnd();
+
+	//点を4箇所描く
+	glColor3f(0,0,0);
+	glPointSize(10);
+	glBegin(GL_POINTS);
+		glVertex2i(240,240);
+		glVertex2i(240,560);
+		glVertex2i(560,240);
+		glVertex2i(560,560);
+	glEnd();
+
+	//
+	for(int i=0;i<8;i++){
+		for(int j=0;j<8;j++){
+			int state=othello->board[i][j];
+			switch(state){
+				case 1:
+					drawCircle(30,80+40+j*80,80+40+i*80,0,0,0);
+					break;
+				case 2:
+					drawCircle(30,80+40+j*80,80+40+i*80,1,1,1);
+					break;
+				default:
+					break;
+			}
+		}
+	}
+
 
 }
