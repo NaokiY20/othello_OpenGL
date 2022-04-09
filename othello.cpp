@@ -68,6 +68,7 @@ bool GameOthello::put_able(int x,int y){
 
 int GameOthello::change_stones(vec2d<int> pos,vec2d<int> vec){
     for(auto list:reverse_stones[pos.x][pos.y]){
+        if(list.empty()) continue;
         for(auto vec:list){
             printf("(%d,%d)\n",vec.x,vec.y);
         }
