@@ -71,8 +71,6 @@ int main(int argc, char *argv[])
 	// glutReshapeFunc(fixedWindow);
 	glutMouseFunc(mouseClick);
 
-	
-
 	glutMainLoop();
 	return 0;
 }

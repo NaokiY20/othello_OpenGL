@@ -54,6 +54,41 @@ void drawMarker(int x,int y,double r,double g,double b){
 	glEnd();
 }
 
+void drawBoardLine(){
+	//ラインを描く
+	glColor3f(0,0,0);
+	glLineWidth(3);//線幅の指定。省略可。指定しなければ1。
+	glBegin(GL_LINES);
+	for(int i=0;i<9;i++){
+		glVertex2i(80+80*i,720);//縦線上端
+		glVertex2i(80+80*i,80);//縦線下端
+		glVertex2i(80,80+80*i);//横線左端
+		glVertex2i(720,80+80*i);//横線右端
+	}
+	glEnd();
+
+	//点を4箇所描く
+	glColor3f(0,0,0);
+	glPointSize(10);
+	glBegin(GL_POINTS);
+		glVertex2i(240,240);
+		glVertex2i(240,560);
+		glVertex2i(560,240);
+		glVertex2i(560,560);
+	glEnd();
+}
+
+void drawChoices(){
+	othello->updateAble();
+	for(int i=0;i<8;i++){
+		for(int j=0;j<8;j++){
+			if(othello->able[i][j]!=0){
+				drawMarker(j,i,0.5,0.8,1.0);
+			}
+		}
+	}
+}
+
 void change_scState(enum scene_state new_state){
 	scState=new_state;
 	elapsed_time=0;
@@ -82,40 +117,10 @@ void disp_select(){
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	//選択肢の表示
-	othello->updateAble();
-	for(int i=0;i<8;i++){
-		for(int j=0;j<8;j++){
-			if(othello->able[i][j]!=0){
-				drawMarker(j,i,0.5,0.8,1.0);
-			}
-		}
-	}
-
+	drawChoices();
 	//カーソル
 	drawMarker(cursorX,cursorY,1.0,1.0,0.0);
-
-	//ラインを描く
-	glColor3f(0,0,0);
-	glLineWidth(3);//線幅の指定。省略可。指定しなければ1。
-	glBegin(GL_LINES);
-	for(int i=0;i<9;i++){
-		glVertex2i(80+80*i,720);//縦線上端
-		glVertex2i(80+80*i,80);//縦線下端
-		glVertex2i(80,80+80*i);//横線左端
-		glVertex2i(720,80+80*i);//横線右端
-	}
-	glEnd();
-
-	//点を4箇所描く
-	glColor3f(0,0,0);
-	glPointSize(10);
-	glBegin(GL_POINTS);
-		glVertex2i(240,240);
-		glVertex2i(240,560);
-		glVertex2i(560,240);
-		glVertex2i(560,560);
-	glEnd();
-
+	drawBoardLine();
 	
 	for(int i=0;i<8;i++){
 		for(int j=0;j<8;j++){
@@ -143,27 +148,7 @@ void disp_reverse(){
 	}
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	//ラインを描く
-	glColor3f(0,0,0);
-	glLineWidth(3);//線幅の指定。省略可。指定しなければ1。
-	glBegin(GL_LINES);
-	for(int i=0;i<9;i++){
-		glVertex2i(80+80*i,720);//縦線上端
-		glVertex2i(80+80*i,80);//縦線下端
-		glVertex2i(80,80+80*i);//横線左端
-		glVertex2i(720,80+80*i);//横線右端
-	}
-	glEnd();
-
-	//点を4箇所描く
-	glColor3f(0,0,0);
-	glPointSize(10);
-	glBegin(GL_POINTS);
-		glVertex2i(240,240);
-		glVertex2i(240,560);
-		glVertex2i(560,240);
-		glVertex2i(560,560);
-	glEnd();
+	drawBoardLine();
 
 	//動かさない駒の表示
 	int state_board[8][8];
@@ -227,8 +212,6 @@ void disp_reverse(){
 			}
 		}
 	}
-
-
 
 	glutSwapBuffers();
 }
