@@ -37,6 +37,7 @@ void mouseMotion(int x,int y){
 
 void mouseClick(int button, int state, int x, int y){
 	if(button==GLUT_LEFT_BUTTON && state==GLUT_DOWN){
+		if(scState==reverse) return;
 		bool res=othello->put_stone(cursorY,cursorX);
 		if(res){
 			putted_stone=vec2d<int>(cursorY,cursorX);
