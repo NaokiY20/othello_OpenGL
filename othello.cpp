@@ -67,13 +67,13 @@ bool GameOthello::put_able(int x,int y){
 }
 
 int GameOthello::change_stones(vec2d<int> pos,vec2d<int> vec){
-    for(auto list:reverse_stones[pos.x][pos.y]){
-        if(list.empty()) continue;
-        for(auto vec:list){
-            printf("(%d,%d)\n",vec.x,vec.y);
-        }
-        printf("\n");
-    }
+    // for(auto list:reverse_stones[pos.x][pos.y]){
+    //     if(list.empty()) continue;
+    //     for(auto vec:list){
+    //         printf("(%d,%d)\n",vec.x,vec.y);
+    //     }
+    //     printf("\n");
+    // }
     if((pos.x<0 || 8<=pos.x) || (pos.y<0 || 8<=pos.y)){
         return -1;
     }
@@ -83,7 +83,7 @@ int GameOthello::change_stones(vec2d<int> pos,vec2d<int> vec){
         int res=change_stones(pos+vec,vec);
         if(res==-1) return -1;
         else{
-			printf("chahge:%d,%d\n",pos.x,pos.y);
+			// printf("chahge:%d,%d\n",pos.x,pos.y);
             if(board[pos.x][pos.y]==BLACK) board[pos.x][pos.y]=WHITE;
             else if(board[pos.x][pos.y]==WHITE) board[pos.x][pos.y]=BLACK;
             return ++res;

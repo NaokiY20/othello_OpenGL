@@ -5,7 +5,7 @@ else
 endif
 CC = g++
 
-all: othello
+all: othello debug test
 othello: main.cpp othello.cpp display.cpp
 	$(CC) main.cpp othello.cpp display.cpp -o run.exe $(LIBS)
 debug: debug.cpp othello.cpp

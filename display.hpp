@@ -23,6 +23,7 @@ extern enum scene_state scState;
 // extern enum scene_state last_scState;
 extern long long elapsed_time; //ms(ミリ秒)
 extern vec2d<int> putted_stone;
+extern double dynamic_board[8][8];
 
 void display(void);
 void disp_select(void);
