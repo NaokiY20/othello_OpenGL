@@ -50,6 +50,15 @@ int main(){
         bool res = othello.put_stone(x,y);
         printf("%s\n",res?"YES":"NO");
         
+        //ひっくり返す候補の表示
+        if(res){
+            for(auto list: othello.reverse_stones[x][y]){
+                if(list.empty()) continue;
+                for(auto vec:list){
+                    printf("v=(%d,%d)\n",vec.x,vec.y);
+                }
+            }
+        }
         printf("\n");
     }
 }
