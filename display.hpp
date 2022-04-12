@@ -19,10 +19,12 @@ enum scene_state{
     reverse
 };
 
-extern enum scene_state state;
-extern enum scene_state last_state;
+extern enum scene_state scState;
+// extern enum scene_state last_scState;
 extern long long elapsed_time; //ms(ミリ秒)
+extern vec2d<int> putted_stone;
 
 void display(void);
 void disp_select(void);
 void disp_reverse(void);
+void change_scState(enum scene_state new_state);

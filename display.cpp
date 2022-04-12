@@ -1,13 +1,16 @@
 #include "display.hpp"
+#include <stdio.h>
+#include <string.h>
 
 int fps=100;
 int cursorX=0;
 int cursorY=0;
 int windowWidth=800;
 int windowHeight=800;
-enum scene_state state=select;
-enum scene_state last_state=select;
+enum scene_state scState=select;
+enum scene_state last_scState=select;
 long long elapsed_time=0;
+vec2d<int> putted_stone;
 
 GameOthello *othello = new GameOthello();
 
@@ -36,18 +39,25 @@ void drawMarker(int x,int y,double r,double g,double b){
 	glEnd();
 }
 
+void change_scState(enum scene_state new_state){
+	scState=new_state;
+	elapsed_time=0;
+}
+
 void display(){
-    switch(state){
+    switch(scState){
         case select:
             disp_select();
+			break;
         case reverse:
             disp_reverse();
+			break;
         default:
             disp_select();
+			break;
     }
-    if(last_state!=state) elapsed_time=0;
-    else elapsed_time+=1000/fps;
-    last_state=state;
+	elapsed_time+=1000/fps;
+	printf("%lld\n",elapsed_time);
 }
 
 void disp_select(){
@@ -109,6 +119,10 @@ void disp_select(){
 }
 
 void disp_reverse(){
+	if(elapsed_time>1000){
+		scState=select;
+		// othello->updatePass();
+	}
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	//ラインを描く
@@ -133,10 +147,19 @@ void disp_reverse(){
 		glVertex2i(560,560);
 	glEnd();
 
-	//
+	//動かさない駒の表示
+	int state_board[8][8];
+	int dynamic_voard[8][8];
+	memcpy(state_board,othello->board,sizeof(othello->board));
+	std::vector<std::vector<vec2d<int>>> stone_lists=othello->reverse_stones[putted_stone.x][putted_stone.y];
+	for(auto list: stone_lists){
+		for(auto vec:list){
+			state_board[vec.x][vec.y]=0;
+		}
+	}
 	for(int i=0;i<8;i++){
 		for(int j=0;j<8;j++){
-			int state=othello->board[i][j];
+			int state=state_board[i][j];
 			switch(state){
 				case 1:
 					drawCircle(30,80+40+j*80,80+40+i*80,0,0,0);
@@ -150,5 +173,5 @@ void disp_reverse(){
 		}
 	}
 
-
+	glutSwapBuffers();
 }

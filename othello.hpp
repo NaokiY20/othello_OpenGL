@@ -15,6 +15,7 @@ template<class T> struct vec2d{
         this->x = v.x;
         this->y = v.y;
     }
+    vec2d():x(-1),y(-1){}
     vec2d operator - () const{
         return vec2d(-this->x, -this->y);
     }

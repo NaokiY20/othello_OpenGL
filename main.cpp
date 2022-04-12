@@ -13,7 +13,6 @@
 #define WIDTH 800
 #define HEIGHT 800
 
-
 void Idle() {
 	// glutPostRedisplay(); //これはGPU使用率がマズそう
 }
@@ -38,8 +37,12 @@ void mouseMotion(int x,int y){
 
 void mouseClick(int button, int state, int x, int y){
 	if(button==GLUT_LEFT_BUTTON && state==GLUT_DOWN){
-		othello->put_stone(cursorY,cursorX);
-		printf("CLICK\n");
+		bool res=othello->put_stone(cursorY,cursorX);
+		if(res){
+			putted_stone=vec2d<int>(cursorY,cursorX);
+			printf("CLICK\n");
+			change_scState(reverse);
+		}
 	}
 }
 
