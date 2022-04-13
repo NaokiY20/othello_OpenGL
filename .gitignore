@@ -2,3 +2,5 @@
 .vscode/
 test*.*
 *.code-workspace
+bmp_test.cpp
+sample.bmp
