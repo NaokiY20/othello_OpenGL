@@ -13,4 +13,8 @@ debug: debug.cpp othello.cpp
 test: animation_test.cpp
 	$(CC) animation_test.cpp -o animation_test $(LIBS)
 bmp: bmp_test.cpp
+ifeq ($(OS),Windows_NT)
 	$(CC) bmp_test.cpp -o bmp_test $(LIBS)
+else
+	$(CC) bmp_test.cpp -o bmp_test $(LIBS) -I /opt/homebrew/include
+endif
