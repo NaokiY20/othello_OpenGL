@@ -1,6 +1,8 @@
 #pragma comment(linker, "/SUBSYSTEM:WINDOWS /ENTRY:mainCRTStartup")
-#include <GL/freeglut.h>
+// #include <GL/freeglut.h>
+#include <GLUT/glut.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 #define WIDTH 320
 #define HEIGHT 240

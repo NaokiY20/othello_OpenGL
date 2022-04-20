@@ -4,7 +4,7 @@ else
 	LIBS = -framework GLUT -framework OpenGL
 endif
 CC = g++
-INCLUDE = -I /opt/homebrew/include
+# INCLUDE = -I /opt/homebrew/include
 
 all: othello debug test bmp
 othello: main.cpp othello.cpp display.cpp
@@ -17,5 +17,6 @@ bmp: bmp_test.cpp
 ifeq ($(OS),Windows_NT)
 	$(CC) bmp_test.cpp -o bmp_test $(LIBS)
 else
-	$(CC) bmp_test.cpp -o bmp_test $(LIBS) $(INCLUDE)
+	# $(CC) bmp_test.cpp -o bmp_test $(LIBS) $(INCLUDE)
+	$(CC) bmp_test.cpp -o bmp_test $(LIBS)
 endif
