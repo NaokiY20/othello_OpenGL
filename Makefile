@@ -5,10 +5,12 @@ else
 endif
 CC = g++
 
-all: othello
-othello: main.cpp othello.cpp
-	$(CC) main.cpp othello.cpp -o run.exe $(LIBS)
+all: othello debug test bmp
+othello: main.cpp othello.cpp display.cpp
+	$(CC) main.cpp othello.cpp display.cpp -o run $(LIBS)
 debug: debug.cpp othello.cpp
 	$(CC) debug.cpp othello.cpp -o debug
 test: animation_test.cpp
 	$(CC) animation_test.cpp -o animation_test $(LIBS)
+bmp: bmp_test.cpp
+	$(CC) bmp_test.cpp -o bmp_test $(LIBS)

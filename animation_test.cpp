@@ -1,5 +1,10 @@
 #include <bits/stdc++.h>
-#include <GL/glut.h>
+#ifdef __APPLE__
+	#include <GLUT/glut.h>
+#else 
+	// #include <glut.h> 
+	#include <GL/glut.h> 
+#endif
 
 #define PI 3.1415926535
 
