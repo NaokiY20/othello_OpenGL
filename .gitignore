@@ -2,7 +2,6 @@
 .vscode/
 test*.*
 *.code-workspace
-sample.bmp
 animation_test
 debug
 run
