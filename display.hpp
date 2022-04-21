@@ -9,7 +9,7 @@
 
 
 #define PI 3.1415926535
-extern GameOthello* othello;
+extern GameOthello *othello;
 
 extern int fps;
 extern int cursorX;
@@ -18,17 +18,35 @@ extern int cursorY;
 extern int windowWidth;
 extern int windowHeight;
 
-enum scene_state{
-    select,
-    reverse
+
+class Scene{
+	// enum scene_list{
+	// 	select,
+	// 	reverse
+	// };
+
+	// enum scene_list scState=select;
+	long long elapsed_time=0; //ms(ミリ秒)
+	// vec2d<int> putted_stone;
+	// double dynamic_board[8][8]; //アニメーションする石
+
+	void disp_select(void);
+	void disp_reverse(void);
+
+
+	public:
+	enum scene_list{
+		select,
+		reverse
+	};
+	enum scene_list scState=select;
+	vec2d<int> putted_stone;
+	double dynamic_board[8][8]; //アニメーションする石
+
+	void display(void);
+	void change_scState(enum scene_list new_state);
 };
 
-extern enum scene_state scState;
-extern long long elapsed_time; //ms(ミリ秒)
-extern vec2d<int> putted_stone;
-extern double dynamic_board[8][8];
+extern Scene *scene;
 
 void display(void);
-void disp_select(void);
-void disp_reverse(void);
-void change_scState(enum scene_state new_state);

@@ -7,13 +7,10 @@ int cursorX=0;
 int cursorY=0;
 int windowWidth=800;
 int windowHeight=800;
-enum scene_state scState=select;
-enum scene_state last_scState=select;
-long long elapsed_time=0;
-vec2d<int> putted_stone;
-double dynamic_board[8][8];
+
 
 GameOthello *othello = new GameOthello();
+Scene *scene = new Scene();
 
 void drawCircle(double radius,double posx,double posy,double r,double g, double b){
 	glColor3d(r,g,b);
@@ -89,7 +86,7 @@ void drawChoices(){
 	}
 }
 
-void change_scState(enum scene_state new_state){
+void Scene::change_scState(enum scene_list new_state){
 	scState=new_state;
 	elapsed_time=0;
 	for(int i=0;i<8;i++)
@@ -97,23 +94,27 @@ void change_scState(enum scene_state new_state){
 	dynamic_board[i][j]=-1;
 }
 
-void display(){
-    switch(scState){
-        case select:
-            disp_select();
+void Scene::display(){
+	switch(scState){
+		case select:
+			disp_select();
 			break;
-        case reverse:
-            disp_reverse();
+		case reverse:
+			disp_reverse();
 			break;
-        default:
-            disp_select();
+		default:
+			disp_select();
 			break;
-    }
+	}
 	elapsed_time+=1000/fps;
 	// printf("%lld\n",elapsed_time);
 }
 
-void disp_select(){
+void display(){
+	scene->display();
+}
+
+void Scene::disp_select(){
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	//選択肢の表示
@@ -141,7 +142,7 @@ void disp_select(){
 	glutSwapBuffers();
 }
 
-void disp_reverse(){
+void Scene::disp_reverse(){
 	if(elapsed_time>500){
 		scState=select;
 		// othello->updatePass();
