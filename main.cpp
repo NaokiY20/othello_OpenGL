@@ -1,10 +1,3 @@
-#ifdef __APPLE__
-	#include <GLUT/glut.h>
-#else 
-	// #include <glut.h> 
-	#include <GL/glut.h> 
-#endif
-// #include <GL/glut.h>
 #include <math.h>
 #include <stdio.h>
 #include "othello.hpp"

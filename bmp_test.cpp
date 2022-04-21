@@ -1,6 +1,10 @@
 #pragma comment(linker, "/SUBSYSTEM:WINDOWS /ENTRY:mainCRTStartup")
 // #include <GL/freeglut.h>
-#include <GLUT/glut.h>
+#ifdef __APPLE__
+	#include <GLUT/glut.h>
+#else 
+	#include <GL/glut.h> 
+#endif
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -97,6 +101,7 @@ void BMP::TexSet()
 }
 
 BMP *bmp;
+BMP *bmp2;
 
 void display(void)
 {
@@ -127,6 +132,7 @@ void Init(){
  glClearColor(0.0, 0.0, 0.0, 1.0);
  glOrtho(0, WIDTH, HEIGHT, 0, -1, 1);
  bmp = new BMP("sample.bmp");
+ bmp2 = new BMP("sample.bmp");
 }
 
 int main(int argc, char *argv[])
