@@ -6,3 +6,6 @@ animation_test
 debug
 run
 bmp_test
+
+# For Mac
+.DS_Store
