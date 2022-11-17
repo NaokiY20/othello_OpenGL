@@ -1,12 +1,8 @@
 #pragma once
-#ifdef __APPLE__
-	#include <GLUT/glut.h>
-#else 
-	#include <GL/glut.h> 
-#endif
+#include <GL/glut.h>
 #include <math.h>
-#include "othello.hpp"
 
+#include "othello.hpp"
 
 #define PI 3.1415926535
 extern GameOthello* othello;
@@ -18,13 +14,10 @@ extern int cursorY;
 extern int windowWidth;
 extern int windowHeight;
 
-enum scene_state{
-    select,
-    reverse
-};
+enum scene_state { select, reverse };
 
 extern enum scene_state scState;
-extern long long elapsed_time; //ms(ミリ秒)
+extern long long elapsed_time;  // ms(ミリ秒)
 extern vec2d<int> putted_stone;
 extern double dynamic_board[8][8];
 
